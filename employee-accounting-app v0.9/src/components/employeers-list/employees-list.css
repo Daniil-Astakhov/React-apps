@@ -1,0 +1,10 @@
+.app-list {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.808);
+    margin-top: 20px;
+    max-height: 210px;
+    overflow: auto;
+    border-radius: 4px;
+    box-shadow: 15px 15px 30px rgba(0,0,0, .15);
+    color: #fff;
+}

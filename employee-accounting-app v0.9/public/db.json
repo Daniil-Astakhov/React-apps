@@ -1,0 +1,28 @@
+[
+    {
+        "data": [
+            {
+                "name": "Daniil A.", 
+                "salary": 15000, 
+                "like": true, 
+                "increase": false, 
+                "id": 1
+            },
+            
+            {
+                "name": "Dinara Sh.",
+                "salary": 3000,
+                "like": false,
+                "increase": false,
+                "id": 2
+            },
+            {
+                "name": "Vasya Pupkin.",
+                "salary": 5,
+                "like": false,
+                "increase": false,
+                "id": 3
+            } 
+        ]
+    }
+]
