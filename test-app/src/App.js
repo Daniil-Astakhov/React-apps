@@ -1,43 +1,70 @@
-import React, {Component} from 'react';
+import {useState} from 'react';
 import {Container} from 'react-bootstrap';
+import { CSSTransition } from 'react-transition-group';
 import './App.css';
 
-class Form extends Component {
-
-    myRef = React.createRef();
-    myRef2 = React.createRef(); 
 
 
+const Modal = (props) => {
 
-    componentDidMount(){
-      this.myRef.current.focus();
-    }
+    const duration = 300;
+ 
 
-    droid = () => {
-      this.myRef.current.focus();
-    }
 
-    render() {
-        return (
-            <Container>
-                <form className="w-50 border mt-5 p-3 m-auto">
-                    <div className="mb-3">
-                        <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
-                        <input ref={this.myRef} type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+    return (
+       <CSSTransition  
+       in={props.show} 
+       timeout={duration}
+       onEnter={() => props.setShowTrigger(false)}
+       onExited={() => props.setShowTrigger(true)}
+       classNames='modal'
+       mountOnEnter
+       unmountOnExit>
+                <div className="modal mt-5 d-block">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">Typical modal window</h5>
+                            <button onClick={() => props.onClose(false)} type="button" className="btn-close" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-body">
+                            <p>Modal body content</p>
+                        </div>
+                        <div className="modal-footer">
+                            <button onClick={() => props.onClose(false)} type="button" className="btn btn-secondary">Close</button>
+                            <button onClick={() => props.onClose(false)} type="button" className="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
                     </div>
-                    <div className="mb-3">
-                        <label  htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
-                        <textarea onClick={this.droid} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </form>
-            </Container>
-        )
-    }
+                </div>
+       </CSSTransition>
+    )
 }
 
 function App() {
+    const [showModal, setShowModal] = useState(false);
+    const [showTrigger, setShowTrigger] = useState(true);
+    const duration = 300;
+    const defaultStyle = {
+        transition: `all ${duration}ms ease-in-out`,
+        opacity: 0,
+        transform: 'translateY(-100%)',
+    };
+    const transitionStyles = {
+        entering: { opacity: 1, transform: 'translateY(0%)' },
+        entered: { opacity: 1, transform: 'translateY(0%)' },
+        exiting: { opacity: 0, transform: 'translateY(-100%)' },
+        exited: { opacity: 0, transform: 'translateY(-100%)' },
+    };
+
     return (
-        <Form/>
+        <Container>
+            <Modal show={showModal} onClose={setShowModal} setShowTrigger={setShowTrigger}/>
+            {showTrigger? <button 
+                type="button" 
+                className="btn btn-warning mt-5"
+                onClick={() => setShowModal(true)}>Open Modal</button> : null}
+        </Container>
     );
 }
 
